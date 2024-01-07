@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/* Estilos Generales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url("/img/movie.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  color: black;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* Ajustado de align-content a align-items */
+  width: 100vw;
+  height: 100vh; /* Asegurándose de que el body tome toda la altura de la ventana */
+  flex-direction: column;
+  padding-top: 1.5rem; /* Remover cualquier margen por defecto */
+}
+
+div.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  /* Contenedor para h1, input y button */
+  /* Contenedor de resultados y paginación */
+  /* Estilos para la paginación */
+}
+div.container .search-container {
+  background-color: rgba(42, 41, 41, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 20px;
+}
+div.container .search-container h1 {
+  margin-bottom: 15px;
+  color: gray;
+  font-size: 2rem;
+}
+div.container .search-container input {
+  border: 2px solid gray;
+  border-radius: 2%;
+  padding: 10px;
+  width: 60%;
+  margin-bottom: 15px;
+  background-color: lightgray;
+}
+div.container .search-container button {
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgb(251, 11, 11);
+  color: aliceblue;
+  cursor: pointer;
+}
+div.container .no-results {
+  background-color: rgba(42, 41, 41, 0.9);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  text-align: center;
+  color: lightgray;
+}
+div.container #results,
+div.container #pagination {
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+div.container .movie {
+  min-height: 200px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgba(42, 41, 41, 0.9);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+div.container .movie img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+div.container .movie h2 {
+  font-size: 1.5rem;
+  margin: 5px 0;
+  color: gray;
+}
+div.container .movie p {
+  margin: 5px 0;
+  color: gray;
+  font-size: 1.2rem;
+}
+div.container .pagination {
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+div.container .pagination li {
+  margin: 5px;
+}/*# sourceMappingURL=styles.css.map */
