@@ -1,8 +1,17 @@
-/* Estilos Generales */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+@mixin box-style {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 body {
@@ -13,115 +22,98 @@ body {
     color: black;
     display: flex;
     justify-content: flex-start;
-    align-items: center; /* Ajustado de align-content a align-items */
-    width: 100vw;
-    height: 100vh; /* Asegurándose de que el body tome toda la altura de la ventana */
-    flex-direction: column;
-    padding-top: 1.5rem; /* Remover cualquier margen por defecto */
-}
-
-
-div.container {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    width: 100vw;
+    height: 100vh;
     flex-direction: column;
-    gap: 1rem;
+    padding-top: 1.5rem;
 
-    /* Contenedor para h1, input y button */
-    .search-container {
-        background-color: rgba(42, 41, 41, 0.9);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        margin-bottom: 20px;
-    }
 
-    .search-container h1 {
-        margin-bottom: 15px;
-        color: gray;
-        font-size: 2rem;
-    }
-
-    .search-container input {
-        border: 2px solid gray;
-        border-radius: 2%;
-        padding: 10px;
-        width: 60%;
-        margin-bottom: 15px;
-        background-color: lightgray;
-    }
-
-    .search-container button {
-        text-align: center;
-        width: 100px;
-        height: 40px;
-        border-radius: 20px;
-        background-color: rgb(251, 11, 11);
-        color: aliceblue;
-        cursor: pointer;
-    }
-
-    .no-results {
-        background-color: rgba(42, 41, 41, 0.9);
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin: 20px;
-        text-align: center;
-        color: lightgray;
-    }
-    
-
-    /* Contenedor de resultados y paginación */
-    #results,
-    #pagination {
-        background-color: transparent;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 80%;
-        margin: auto;
-        margin-bottom: 20px;
-    }
-
-    .movie {
-        min-height: 200px;
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: rgba(42, 41, 41, 0.9);
-        border-radius: 5px;
+    div.container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .movie img {
-        width: 100px;
-        margin-bottom: 10px;
-    }
-
-    .movie h2 {
-        font-size: 1.5rem;
-        margin: 5px 0;
-        color:gray
-    }
-
-    .movie p {
-        margin: 5px 0;
-        color: gray;
-        font-size: 1.2rem;
-    }
-
-    /* Estilos para la paginación */
-    .pagination {
         justify-content: center;
-        flex-wrap: wrap;
-        max-width: 100%;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
 
-        li {
-            margin: 5px;
+        /* Contenedor para h1, input y button */
+        .search-container {
+            background-color: rgba(42, 41, 41, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+
+            h1 {
+                margin-bottom: 15px;
+                color: gray;
+                font-size: 2rem;
+            }
+
+            input {
+                border: 2px solid gray;
+                border-radius: 2%;
+                padding: 10px;
+                width: 60%;
+                margin-bottom: 15px;
+                background-color: lightgray;
+            }
+
+            button {
+                text-align: center;
+                width: 100px;
+                height: 40px;
+                border-radius: 20px;
+                background-color: rgb(251, 11, 11);
+                color: aliceblue;
+                cursor: pointer;
+            }
+        }
+
+        #results {
+            @include box-style;
+
+            .movie {
+                min-height: 200px;
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: rgba(42, 41, 41, 0.9);
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    width: 100px;
+                    margin-bottom: 10px;
+                }
+
+                h2 {
+                    font-size: 1.5rem;
+                    margin: 5px 0;
+                    color: gray
+                }
+
+                p {
+                    margin: 5px 0;
+                    color: gray;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+        /* Estilos para la paginación */
+        .pagination {
+            @include box-style;
+
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 100%;
+            
+            li {
+                margin: 5px;
+            }
         }
     }
 }
