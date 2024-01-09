@@ -15,25 +15,62 @@ function setupPagination(totalMovies) {
     const paginationUl = document.getElementById('pagination');
     paginationUl.innerHTML = '';
 
-    for (let i = 1; i <= pageCount; i++) {
-        const li = document.createElement('li');
-        li.classList.add('page-item');
-        if (i === currentPage) li.classList.add('active');
+    const maxVisiblePages = 5; // Máximo de páginas visibles a la vez
+    let startPage = Math.max(currentPage - Math.floor(maxVisiblePages / 2), 1);
+    let endPage = Math.min(startPage + maxVisiblePages - 1, pageCount);
 
-        const a = document.createElement('a');
-        a.classList.add('page-link');
-        a.href = '#';
-        a.textContent = i;
-        a.addEventListener('click', function (e) {
-            e.preventDefault();
-            currentPage = i;
-            searchMovies(false);
-        });
+    // Asegurar que siempre haya maxVisiblePages páginas visibles
+    if (endPage - startPage < maxVisiblePages - 1) {
+        startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+    }
 
-        li.appendChild(a);
-        paginationUl.appendChild(li);
+    // Botón para ir a la primera página
+    if (startPage > 1) {
+        addPaginationItem(paginationUl, 1, '<<');
+    }
+
+    // Botón para ir a la página anterior
+    if (currentPage > 1) {
+        addPaginationItem(paginationUl, currentPage - 1, '<');
+    }
+
+    // Números de página
+    for (let i = startPage; i <= endPage; i++) {
+        addPaginationItem(paginationUl, i, i);
+    }
+
+    // Botón para ir a la página siguiente
+    if (currentPage < pageCount) {
+        addPaginationItem(paginationUl, currentPage + 1, '>');
+    }
+
+    // Botón para ir a la última página
+    if (endPage < pageCount) {
+        addPaginationItem(paginationUl, pageCount, '>>');
     }
 }
+
+function addPaginationItem(container, page, text) {
+    const li = document.createElement('li');
+    li.classList.add('page-item');
+    if (page === currentPage) {
+        li.classList.add('active');
+    }
+
+    const a = document.createElement('a');
+    a.classList.add('page-link');
+    a.href = '#';
+    a.textContent = text;
+    a.addEventListener('click', function (e) {
+        e.preventDefault();
+        currentPage = page;
+        searchMovies(false);
+    });
+
+    li.appendChild(a);
+    container.appendChild(li);
+}
+
 
 function searchMovies(isNewSearch = true) {
     if (isNewSearch) {
@@ -78,9 +115,6 @@ function displayMovies(movies) {
         let releaseDate = document.createElement('p');
         releaseDate.textContent = 'La fecha de lanzamiento fue: ' + movie.release_date;
 
-        let overview = document.createElement('p');
-        overview.textContent = movie.overview;
-
         let posterPath = urlImg + movie.poster_path;
         let poster = document.createElement('img');
         poster.src = posterPath;
@@ -88,7 +122,6 @@ function displayMovies(movies) {
         movieDiv.appendChild(poster);
         movieDiv.appendChild(title);
         movieDiv.appendChild(releaseDate);
-        movieDiv.appendChild(overview);
 
         resultContainer.appendChild(movieDiv);
     });
