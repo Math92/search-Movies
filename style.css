@@ -220,10 +220,11 @@ p {
 /* ------------------------------------------------------------------------------------------------------------- */
 @media screen and (max-width: 600px) {
     .info {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
 
     .poster {
@@ -261,5 +262,49 @@ p {
     .details,
     .genre {
         justify-content: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .info {
+        width: 100%;
+    }
+
+    .genre {
+        /* Change genre layout to column */
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items:center;
+        /* Align items to the start for a cleaner look */
+    }
+
+    h3,
+    p {
+        /* Adjust font size for Plot and Cast */
+        font-size: 0.8em;
+        /* Adjust the size as needed */
+    }
+
+    /* Convert static pixel values to relative units (example) */
+    .details span {
+        padding: 0.4rem;
+        /* Adjust as per your design */
+    }
+}
+
+@media screen and (max-width: 300px){
+    h3,
+    p {
+        /* Adjust font size for Plot and Cast */
+        font-size: 0.5rem;
+        line-height: 1em;
+
+        /* Adjust the size as needed */
+    }
+
+    /* Convert static pixel values to relative units (example) */
+    .details span {
+        padding: 0.2rem;
+        /* Adjust as per your design */
     }
 }

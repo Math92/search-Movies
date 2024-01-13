@@ -17,50 +17,53 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (movieName.length <= 0) {
             result.innerHTML = `<h3 class="msg">Please enter a movie name.</h3>`;
             pagination.innerHTML = '';
-        } else {
-            fetch(url).then((resp) => resp.json()).then((data) => {
-                if (data.Response == "True") {
-                    totalResults = parseInt(data.totalResults);
-                    let movieDetailsPromises = data.Search.map(movie => fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${key}`)
-                        .then(response => response.json()));
-
-                    Promise.all(movieDetailsPromises).then(details => {
-                        result.innerHTML = details.map(detail => `
-                            <div class="info">
-                                <img src="${detail.Poster}" class="poster">
-                                <div class="info-movie">
-                                    <h2>${detail.Title}</h2>
-                                    <div class="rating">
-                                        <img src="star-icon.svg" alt="Star icon">
-                                        <h4>${detail.imdbRating}</h4>
-                                    </div>
-                                    <div class="details">
-                                        <span>${detail.Rated}</span>
-                                        <span>${detail.Year}</span>
-                                        <span>${detail.Runtime}</span>
-                                    </div>
-                                    <div class="genre">${detail.Genre.split(',').map(genre => `<div>${genre.trim()}</div>`).join('')}</div>
-                                    <h3>Plot:</h3>
-                                    <p>${detail.Plot}</p>
-                                    <h3>Cast:</h3>
-                                    <p>${detail.Actors}</p>
-                                </div>
-                            </div>
-                        `).join('');
-                        setupPagination(totalResults);
-                        result.classList.add('fadeIn');
-
-                    });
-                } else {
-                    result.innerHTML = `<h3 class="msg">${data.Error}</h3>`;
-                    pagination.innerHTML = '';
-                }
-            })
-                .catch((error) => {
-                    result.innerHTML = `<h3 class="msg">Error Occurred: ${error.message}</h3>`;
-                    pagination.innerHTML = '';
-                });
+            return;
         }
+
+        fetch(url).then((resp) => resp.json()).then((data) => {
+            if (data.Response == "True") {
+                totalResults = parseInt(data.totalResults);
+                let movieDetailsPromises = data.Search.map(movie => fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${key}`)
+                    .then(response => response.json()));
+
+                Promise.all(movieDetailsPromises).then(details => {
+                    // Ordenar las películas por año de forma descendente
+                    let sortedDetails = details.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+
+                    // Actualizar el DOM con las películas ordenadas
+                    result.innerHTML = sortedDetails.map(detail => `
+                        <div class="info">
+                            <img src="${detail.Poster}" class="poster">
+                            <div class="info-movie">
+                                <h2>${detail.Title}</h2>
+                                <div class="rating">
+                                    <img src="star-icon.svg" alt="Star icon">
+                                    <h4>${detail.imdbRating}</h4>
+                                </div>
+                                <div class="details">
+                                    <span>${detail.Rated}</span>
+                                    <span>${detail.Year}</span>
+                                    <span>${detail.Runtime}</span>
+                                </div>
+                                <div class="genre">${detail.Genre.split(',').map(genre => `<div>${genre.trim()}</div>`).join('')}</div>
+                                <h3>Plot:</h3>
+                                <p>${detail.Plot}</p>
+                                <h3>Cast:</h3>
+                                <p>${detail.Actors}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                    setupPagination(totalResults);
+                    result.classList.add('fadeIn');
+                });
+            } else {
+                result.innerHTML = `<h3 class="msg">${data.Error}</h3>`;
+                pagination.innerHTML = '';
+            }
+        }).catch((error) => {
+            result.innerHTML = `<h3 class="msg">Error Occurred: ${error.message}</h3>`;
+            pagination.innerHTML = '';
+        });
     };
 
     function setupPagination(totalMovies) {
