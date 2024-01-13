@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    background: whitesmoke;
+    font-size: 16px;
+    padding: 1em;
+    background-image: url("/movie.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    max-width: 37.5em;
+    margin: 0 auto;
+    background-color: #1e293b;
+    padding: 2em;
+    border-radius: 0.6em;
+    box-shadow: 1.2em 2em 3em rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.search-container {
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    gap: 1.2em;
+}
+
+.search-container input,
+.search-container button {
+    font-size: 0.9em;
+    outline: none;
+    border-radius: 0.3em;
+}
+
+.search-container input {
+    background-color: transparent;
+    border: 1px solid #a0a0a0;
+    color: #fff;
+    padding: 0.7em;
+}
+
+.search-container input:focus {
+    border-color: #fff;
+}
+
+.search-container button {
+    background-color: #ffb92a;
+    border: none;
+    cursor: pointer;
+
+}
+
+.search-container button:hover {
+    color: #ffb92a;
+    background-color: black;
+    transition: background-color 0.5s;
+}
+
+#result {
+    color: #fff;
+    margin-top: 1.5em;
+}
+
+.info {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 1.2em;
+    margin-top: 1.2em;
+    overflow: hidden;
+}
+
+.poster {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    margin: 0.6em 0 0.9em 0;
+}
+
+.rating img {
+    width: 1.2em;
+}
+
+.rating h4 {
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.details {
+    display: flex;
+    font-size: 0.95em;
+    gap: 1em;
+    justify-content: center;
+    color: #a0a0a0;
+    margin: 0.6em 0;
+    font-weight: 300;
+}
+
+.genre {
+    display: flex;
+    justify-content: space-around;
+}
+
+.genre div {
+    border: 1px solid #a0a0a0;
+    font-size: 0.75em;
+    padding: 0.4em 1.6em;
+    border-radius: 0.4em;
+    font-weight: 300;
+}
+
+h3 {
+    font-weight: 500;
+    margin-top: 1.2em;
+}
+
+p {
+    font-size: 0.9em;
+    font-weight: 300;
+    line-height: 1.8em;
+    text-align: justify;
+    color: #a0a0a0;
+}
+
+.msg {
+    text-align: center;
+}
+
+.info+.info {
+    margin-top: 2em;
+}
+
+.info {
+    background-color: #2b3b52;
+    padding: 2rem;
+    border-radius: 0.5em;
+    box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.2);
+}
+
+/* Define the fadeIn animation */
+
+
+/* Define the fadeIn class that uses the animation */
+.fadeIn {
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+    /* Adjust delay if needed */
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Style for the loading message */
+.loading-message {
+    color: #fff;
+    text-align: center;
+    margin-top: 2em;
+    font-size: 1.2em;
+}
+
+
+#pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#pagination button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #ffb92a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pagination button[disabled] {
+    background-color: #ccc;
+    cursor: default;
+}
+
+#pagination button:not([disabled]):hover {
+    background-color: #e0a800;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------- */
+@media screen and (max-width: 600px) {
+    .info {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .poster {
+        width: auto;
+        max-height: 10.8em;
+        margin-bottom: 1em;
+    }
+
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-container input {
+        width: 70%;
+    }
+
+    .search-container button {
+        width: 70%;
+    }
+
+    .movie {
+        width: 100%;
+    }
+
+    #pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .rating,
+    .details,
+    .genre {
+        justify-content: center;
+    }
+}
