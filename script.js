@@ -8,12 +8,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const resultsPerPage = 10; // Assuming 10 results per page
     const maxVisiblePages = 5; // Maximum number of visible pages at once
 
+    // Event listener for Enter key press on the movie name input field
     movieNameRef.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             getMovie(currentPage);
         }
     });
 
+    // Event listener for Enter key press on the search button
+    searchBtn.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            getMovie(currentPage);
+        }
+    });
+
+    // Function to fetch and display movies based on the current page and search term
     let getMovie = (page) => {
         result.innerHTML = `<h3 class="loading-message">Loading movies...</h3>`;
         result.classList.add('fadeIn');
@@ -33,10 +42,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     .then(response => response.json()));
 
                 Promise.all(movieDetailsPromises).then(details => {
-                    // Ordenar las películas por año de forma descendente
                     let sortedDetails = details.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
 
-                    // Actualizar el DOM con las películas ordenadas
                     result.innerHTML = sortedDetails.map(detail => `
                         <div class="info">
                             <img src="${detail.Poster}" class="poster">
@@ -72,6 +79,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     };
 
+    // Function to set up pagination based on the total number of movies
     function setupPagination(totalMovies) {
         const pageCount = Math.ceil(totalMovies / resultsPerPage);
         pagination.innerHTML = '';
@@ -104,6 +112,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
+    // Function to add an individual pagination item
     function addPaginationItem(container, page, text) {
         const button = document.createElement('button');
         button.textContent = text;
@@ -120,5 +129,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         container.appendChild(button);
     }
 
+    // Click event listener for the search button
     searchBtn.addEventListener("click", () => getMovie(currentPage));
 });

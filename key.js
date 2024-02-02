@@ -1,2 +1,2 @@
-const key = 'YOUR-API-KEY'; 
+const key = ''; 
 
