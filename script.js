@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const resultsPerPage = 10; // Assuming 10 results per page
     const maxVisiblePages = 5; // Maximum number of visible pages at once
 
+    movieNameRef.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            getMovie(currentPage);
+        }
+    });
+
     let getMovie = (page) => {
         result.innerHTML = `<h3 class="loading-message">Loading movies...</h3>`;
         result.classList.add('fadeIn');
